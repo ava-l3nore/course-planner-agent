@@ -2,7 +2,7 @@ import os, hashlib
 
 from playwright.sync_api import sync_playwright
 
-def fetch(major, URL):
+def fetch(major, URL, cond):
     CACHE = f"cache/{major}.html"
 
     os.makedirs("cache", exist_ok=True)
@@ -19,7 +19,7 @@ def fetch(major, URL):
             print("acalog-course" in html)
             b.close()
 
-        if len(html) < 50_000 or "acalog-course" not in html:
+        if len(html) < 50_000 or cond not in html:
             raise RuntimeError(f"bad fetch: {len(html)} chars")
 
         open(CACHE, "w", encoding="utf-8").write(html)

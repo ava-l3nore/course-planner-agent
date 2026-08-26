@@ -2,11 +2,20 @@ import parse
 import walker as walk
 
 def main():
+    # main pages
     ACADEMIC_REGULATIONS = "https://catalog.cofc.edu/content.php?catoid=32&navoid=1442"
     FYE = "https://catalog.cofc.edu/content.php?catoid=32&navoid=1571"
     FOUNDING_DOCS = "https://catalog.cofc.edu/content.php?catoid=32&navoid=1465"
     MUGC = "https://catalog.cofc.edu/content.php?catoid=32&navoid=1464"
     GEN_EDS = "https://catalog.cofc.edu/content.php?catoid=32&navoid=1461"
+
+    pages = {"academic_regulations": ACADEMIC_REGULATIONS, "fye": FYE, "founding_docs": FOUNDING_DOCS, "mugc": MUGC, "gen_eds": GEN_EDS}
+
+    for page, url in pages.items():
+
+        soup = parse.parse(page, url, "acalog-block-n1")
+
+        walk.walker(soup)
 
     # computing school majors
     CS_BS = "https://catalog.cofc.edu/preview_program.php?catoid=32&poid=6311"
@@ -24,7 +33,7 @@ def main():
 
     for major, url in majors.items():
 
-        soup = parse.parse(major, url)
+        soup = parse.parse(major, url, "acalog-course")
 
         walk.walker(soup)
 
