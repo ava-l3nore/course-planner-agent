@@ -3,7 +3,7 @@ import fetch
 
 def parse(major, URL, cond):
     soup = BeautifulSoup(fetch.fetch(major, URL, cond), "html.parser")
-    print("courses found:", len(soup.select("li.acalog-course")))
+    print(f"{major} courses found:", len(soup.select("li.acalog-course")))
 
     '''
     print("courses: ")
